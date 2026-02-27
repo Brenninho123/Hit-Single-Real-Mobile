@@ -1,26 +1,23 @@
-name: Android Release Build
+name: Android Build
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Java 17
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@v1
+      - uses: krdlab/setup-haxe@v1
         with:
           haxe-version: 4.3.2
 
@@ -30,16 +27,13 @@ jobs:
       - name: Install Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Accept Licenses
-        run: yes | sdkmanager --licenses
-
       - name: Install SDK Components
         run: |
-          sdkmanager "platform-tools"
+          yes | sdkmanager --licenses
           sdkmanager "platforms;android-34"
           sdkmanager "build-tools;34.0.0"
 
-      - name: Install Haxe Libraries
+      - name: Install Libraries
         run: |
           haxelib install lime
           haxelib install openfl
@@ -53,16 +47,10 @@ jobs:
           haxelib install hscript-iris
           haxelib install extension-androidtools
           haxelib run lime setup
-          haxelib run openfl setup
+          haxelib run lime setup android
           haxelib run lime rebuild hxcpp
 
-      - name: Create Missing Folders (CI Fix)
-        run: |
-          mkdir -p assets
-          mkdir -p content
-          mkdir -p projFiles/icon
-
-      - name: Build Release APK
+      - name: Build APK
         run: haxelib run lime build android -release
 
       - name: Upload APK
