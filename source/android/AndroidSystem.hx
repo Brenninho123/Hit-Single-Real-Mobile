@@ -1,4 +1,4 @@
-package Android;
+package android;
 
 #if android
 import sys.io.File;

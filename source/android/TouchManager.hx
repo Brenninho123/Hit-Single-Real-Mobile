@@ -1,4 +1,4 @@
-package Android;
+package android;
 
 import flixel.FlxG;
 import openfl.events.TouchEvent;
