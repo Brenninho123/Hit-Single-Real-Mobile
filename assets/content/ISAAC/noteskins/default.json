@@ -1,0 +1,289 @@
+{
+	"extraSkin": "NOTE_assets",
+	"singAnimations": [
+		"singLEFT",
+		"singDOWN",
+		"singUP",
+		"singRIGHT"
+	],
+	"playerSkin": "noteSkins/noteskin",
+	"receptorAnimations": [
+		[
+			{
+				"xmlName": "arrowLEFT",
+				"offsets": [
+					0,
+					0
+				],
+				"anim": "static"
+			},
+			{
+				"xmlName": "left press",
+				"offsets": [
+					-2,
+					-1
+				],
+				"anim": "pressed"
+			},
+			{
+				"xmlName": "left confirm",
+				"offsets": [
+					-1,
+					-1
+				],
+				"anim": "confirm"
+			}
+		],
+		[
+			{
+				"xmlName": "arrowDOWN",
+				"offsets": [
+					0,
+					0
+				],
+				"anim": "static"
+			},
+			{
+				"xmlName": "down press",
+				"offsets": [
+					-1,
+					-1
+				],
+				"anim": "pressed"
+			},
+			{
+				"xmlName": "down confirm",
+				"offsets": [
+					-2,
+					-1
+				],
+				"anim": "confirm"
+			}
+		],
+		[
+			{
+				"xmlName": "arrowUP",
+				"offsets": [
+					0,
+					0
+				],
+				"anim": "static"
+			},
+			{
+				"xmlName": "up press",
+				"offsets": [
+					-1,
+					-3
+				],
+				"anim": "pressed"
+			},
+			{
+				"xmlName": "up confirm",
+				"offsets": [
+					-1,
+					-3
+				],
+				"anim": "confirm"
+			}
+		],
+		[
+			{
+				"xmlName": "arrowRIGHT",
+				"offsets": [
+					0,
+					0
+				],
+				"color": null,
+				"anim": "static"
+			},
+			{
+				"xmlName": "right press",
+				"offsets": [
+					-1,
+					-1
+				],
+				"anim": "pressed"
+			},
+			{
+				"xmlName": "right confirm",
+				"offsets": [
+					-1,
+					-1
+				],
+				"anim": "confirm"
+			}
+		]
+	],
+	"noteSplashAnimations": [
+		{
+			"xmlName": "note splash purple",
+			"offsets": [
+				60,
+				40
+			],
+			"anim": "note0"
+		},
+		{
+			"xmlName": "note splash blue",
+			"offsets": [
+				60,
+				40
+			],
+			"anim": "note1"
+		},
+		{
+			"xmlName": "note splash green",
+			"offsets": [
+				60,
+				40
+			],
+			"anim": "note2"
+		},
+		{
+			"xmlName": "note splash red",
+			"offsets": [
+				60,
+				33
+			],
+			"anim": "note3"
+		},
+		{
+			"xmlName": "note splash red",
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "note4"
+		}
+	],
+	"noteAnimations": [
+		[
+			{
+				"xmlName": "purple",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "purple",
+				"anim": "purpleScroll"
+			},
+			{
+				"xmlName": "purple hold piece",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "purple",
+				"anim": "purplehold"
+			},
+			{
+				"xmlName": "pruple end hold",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "purple",
+				"anim": "purpleholdend"
+			}
+		],
+		[
+			{
+				"xmlName": "blue",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "blue",
+				"anim": "blueScroll"
+			},
+			{
+				"xmlName": "blue hold piece",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "blue",
+				"anim": "bluehold"
+			},
+			{
+				"xmlName": "blue hold end",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "blue",
+				"anim": "blueholdend"
+			}
+		],
+		[
+			{
+				"xmlName": "green",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "green",
+				"anim": "greenScroll"
+			},
+			{
+				"xmlName": "green hold piece",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "green",
+				"anim": "greenhold"
+			},
+			{
+				"xmlName": "green hold end",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "green",
+				"anim": "greenholdend"
+			}
+		],
+		[
+			{
+				"xmlName": "red",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "red",
+				"anim": "redScroll"
+			},
+			{
+				"xmlName": "red hold piece",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "red",
+				"anim": "redhold"
+			},
+			{
+				"xmlName": "red hold end",
+				"offsets": [
+					0,
+					0
+				],
+				"color": "red",
+				"anim": "redholdend"
+			}
+		]
+	],
+	"pixelSize": [
+		4,
+		5
+	],
+	"hasQuants": false,
+	"noteSplashSkin": "noteSplashes/noteskinplash",
+	"isQuants": false,
+	"globalSkin": "noteSkins/noteskin",
+	"antialiasing": true,
+	"isPixel": false,
+	"opponentSkin": "noteSkins/noteskin",
+	"sustainSuffix": "ENDS"
+}

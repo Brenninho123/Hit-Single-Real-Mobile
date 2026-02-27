@@ -1,0 +1,128 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"cameraOffset": [
+				0,
+				0
+			],
+			"offsets": [
+				-5,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "BFIdle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"cameraOffset": [
+				-30,
+				0
+			],
+			"offsets": [
+				53,
+				-3
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "BFLeft",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"cameraOffset": [
+				0,
+				30
+			],
+			"offsets": [
+				0,
+				-23
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "BFDown",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"cameraOffset": [
+				0,
+				-30
+			],
+			"offsets": [
+				-12,
+				38
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "BFUp",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-49,
+				5
+			],
+			"cameraOffset": [
+				-30,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "BFRight"
+		},
+		{
+			"loop": false,
+			"cameraOffset": [
+				0,
+				0
+			],
+			"offsets": [
+				-30,
+				0
+			],
+			"anim": "hurt",
+			"fps": 24,
+			"name": "BFHurt",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-3,
+				53
+			],
+			"indices": [],
+			"fps": 24,
+			"cameraOffset": [
+				0,
+				0
+			],
+			"anim": "death",
+			"loop": false,
+			"name": "BFDeath"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/bfsaac",
+	"position": [
+		0,
+		350
+	],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [
+		49,
+		176,
+		209
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

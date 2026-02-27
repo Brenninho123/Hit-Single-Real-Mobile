@@ -1,0 +1,292 @@
+import flixel.text.FlxText;
+import openfl.filters.ShaderFilter;
+import funkin.game.shaders.ColorSwap;
+
+var camZoomLock = false;
+var camTween:FlxTween;
+
+var openVid:FunkinVideoSprite;
+var myWay:FunkinVideoSprite;
+
+var lyrics:FlxText;
+
+var weirdzoom:Bool = true;
+
+var bars:FlxSprite;
+var mirror:FlxSprite;
+var lyric:AnimateSprite;
+var blackScreen:FlxSprite;
+var fogGrp:Array<FlxSprite> = [];
+var blue = newShader('blue');
+blue.data.hue.value = [1.3];
+blue.data.pix.value = [0.00001];
+
+function onDestroy() {
+    if (openVid != null) openVid.destroy();
+    if (myWay != null) myWay.destroy();  
+}
+
+function onLoad(){
+    FlxG.sound.music.volume = 0;
+
+    mirror = new FlxSprite().loadGraphic(Paths.image('bg/broken_mirror'));
+    mirror.loadGraphic(Paths.image('bg/silly_mirror'));
+    mirror.useColorTransform = true;
+    mirror.zIndex = 0;
+    add(mirror);
+
+    var sprite = new SpriteFromSheet(0,0,'bg/bgAssets','Silly_floor');
+    sprite.zIndex = 3;
+    add(sprite);
+    var sprite = new SpriteFromSheet(0,0,'bg/bgAssets','Silly_idk_1');
+    sprite.zIndex = 4;
+    add(sprite);
+    var sprite = new SpriteFromSheet(0,0,'bg/bgAssets','Silly_idk_2');
+    sprite.zIndex = 99;
+    add(sprite);
+
+    blackScreen = new FlxSprite().makeGraphic(1, 1, 0xFF000000);
+    blackScreen.scale.set(FlxG.width * 2,FlxG.height * 2);
+    blackScreen.updateHitbox();
+    blackScreen.scrollFactor.set();
+    blackScreen.screenCenter();
+    blackScreen.alpha = 0;
+    add(blackScreen);
+    blackScreen.zIndex = 1000;
+}
+
+function onCreatePost(){
+    camZooming = true;
+    playHUD.showRating = false;
+    playHUD.showCombo = false;
+    // FlxG.cameras.clear();
+
+    camGame.bgColor = 0x00000000;
+
+    var vig = new FlxSprite().loadGraphic(Paths.image('vignette'));
+    vig.cameras = [camHUD];
+    add(vig);
+
+    lyric = new AnimateSprite(1600, 1130, Paths.textureAtlas('lyric'));
+    lyric.showPivot = false;
+    lyric.anim.addBySymbol('story_of_yourtalebilly', 'story_of_yourtalebilly',0,0,24);
+    lyric.antialiasing = true;
+    lyric.visible = false;
+    add(lyric);
+
+    openVid = new FunkinVideoSprite();
+	if (openVid.load(Paths.video('open'), [FunkinVideoSprite.muted]))
+	{
+		openVid.onStart(() -> {
+			openVid.stop();
+			openVid.visible = false;
+		}, true);
+		
+		openVid.play();
+	}
+	openVid.onFormat(() -> {
+		openVid.cameras = [camOther];
+        openVid.scale.set(1.5, 1.5);
+        openVid.updateHitbox();
+		openVid.screenCenter();
+		openVid.visible = true;
+        openVid.antialiasing = true;
+	});
+	openVid.onEnd(()->{
+        camGame.alpha = 1;
+        camGame.zoom = 1.125;
+        camHUD.zoom = 1.25;
+        FlxTween.tween(camHUD, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+        camGame.flash(0xFF000000, 0.25);
+    });
+	add(openVid);
+
+	myWay = new FunkinVideoSprite();
+	myWay.load(Paths.video('SO_STAY_FINAL'), [FunkinVideoSprite.muted]);
+	myWay.onFormat(() -> {
+        myWay.cameras = [camHUD];
+        myWay.screenCenter();
+        myWay.antialiasing = true;
+	});
+    var f = [new ShaderFilter(blue)];
+    myWay.onEnd(()->{
+        camZoomLock = false;
+        for(m in [camGame, camHUD]) m.filters = f;
+        blackScreen.alpha = 0;
+        camGame.flash(0xFF000000, 2);       
+        lyric.visible = false;
+        dad.visible = true;
+        camGame.zoom = 1.1;
+        FlxTween.num(0.5, 0, 2, {ease: FlxEase.quadOut, onUpdate: function(s:FlxTween){
+            modManager.setValue("opponentSwap", s.value, 0);
+        }});
+    });
+	add(myWay);
+
+    opponentStrums.cameras = [camGame];
+    for(i in 0...opponentStrums.members.length){
+		opponentStrums.members[i].scrollFactor.set(1, 1);
+	}
+
+    modManager.setValue('transformX', 730, 1);
+    modManager.setValue('transformY', 400, 1);
+    modManager.setValue("transformZ", 0.25, 1);
+    modManager.setValue('flip', -0.25, 1);
+    modManager.setValue('boost', 1, 1);
+    modManager.setValue('sudden', 0.9, 1);
+    modManager.setValue('suddenOffset', 1, 1);
+    modManager.setValue('alpha', 0.5, 1);
+
+    bars = new FlxSprite().loadGraphic(Paths.image('bars'));
+    bars.cameras = [camHUD];
+    add(bars);
+    
+    lyrics = new FlxText();
+    lyrics.setFormat(Paths.font("Times New Roman.ttf"), 48, 0xFFcfa92d, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, 0xFF000000);
+    lyrics.borderSize = 2;
+    lyrics.text = 'IM HORNY!';
+    lyrics.cameras = [camHUD];
+    lyrics.screenCenter(FlxAxes.X);
+    lyrics.y = FlxG.height - lyrics.height;
+    lyrics.text = '';
+    add(lyrics);
+
+    camHUD.alpha = 0;
+    camGame.alpha = 0;
+
+    for(m in [playFields, notes, playHUD]){
+        remove(m);
+        stage.add(m);
+    }
+
+    playHUD.zIndex = 0;
+    playFields.zIndex = 1;
+    notes.zIndex = 2;
+    dadGroup.zIndex = 5;
+    lyric.zIndex = 6;
+    boyfriendGroup.zIndex = 7;
+    refreshZ(stage);
+}
+
+function onSongStart(){
+    FlxG.sound.music.volume = 1;
+    openVid.play();
+}
+
+function onSpawnNotePost(dunceNote){
+	if(dunceNote.mustPress != true){
+        dunceNote.cameras = [camGame];
+		dunceNote.scrollFactor.set(1, 1);
+        dunceNote.zIndex = 1;
+    }
+}
+
+function onMoveCamera(whosTurn){
+    if (camZoomLock) return;
+
+    if(whosTurn == "dad")
+        defaultCamZoom = 0.625;
+    else
+        defaultCamZoom = 0.5;
+}
+
+function onEvent(eventName, value1, value2){
+    if (eventName == '') {
+        if (value1 == 'zoomin') {
+            defaultCamZoomAdd = Std.parseFloat(value2);
+        }
+        if (value1 == 'hurt') {
+            if (health > 0.5) {
+                health -= 0.05;
+            }
+        }
+        if (value1 == 'setZoom') {
+            camZoomLock = true;
+            triggerEventNote('Add Camera Zoom','','');
+            val = Std.parseFloat(value2);
+            defaultCamZoom = val;
+            FlxG.camera.zoom = val;
+        }
+        if (value1 == 'removeLock') camZoomLock = false;
+    }
+    if(eventName == 'Set Zoom'){
+        if (camTween != null)
+        {
+            camTween.cancel();
+            camTween = null;
+        }
+        var val1:Float = Std.parseFloat(value1);
+        if(Math.isNaN(val1)) val1 = 1;
+
+        var targetZoom = defaultCamZoom * val1;
+        if (value2 != '')
+        {
+            var split = value2.split(',');
+            var duration:Float = 0;
+            var leEase:String = 'linear';
+            if(split[0] != null) duration = Std.parseFloat(split[0].trim());
+            if(split[1] != null) leEase = split[1].trim();
+            if(Math.isNaN(duration)) duration = 0;
+
+            if (duration > 0)
+            {
+                camTween = FlxTween.tween(FlxG.camera, {zoom: targetZoom}, duration, {ease: FlxEase.circOut, onComplete:
+                    function (twn:FlxTween)
+                    {
+                        camTween = null;
+                    }
+                });
+            }
+            else
+            {
+                FlxG.camera.zoom = targetZoom;
+            }
+        }
+        defaultCamZoom = targetZoom;
+    }
+    if(eventName == "ill make"){
+        switch(value1){
+            case 'hud in':
+                modManager.setValue("opponentSwap", 0.5, 0);
+                FlxTween.tween(camHUD, {alpha: 1}, 1.5, {ease: FlxEase.quadOut});
+                FlxTween.num(1, 0, 1.5, {ease: FlxEase.quadOut, onUpdate: function(hudIn:FlxTween){
+                    modManager.setValue("alpha", hudIn.value, 0);
+                }, onComplete: ()->{ modManager.setValue("alpha", 0, 0); }});
+            case 'vid':
+                myWay.play();
+                FlxTween.tween(myWay, {alpha: 1}, 0.125 * 1.5, {ease: FlxEase.quadOut});
+
+            case 'anim':
+                vocals.volume = 1;
+                lyric.visible = true;
+                dad.visible = false;
+                lyric.anim.play('story_of_yourtalebilly');
+            case 'black':
+                FlxTween.tween(blackScreen, {alpha: 1}, 1.125, {ease: FlxEase.quadOut});
+                FlxTween.num(0.6, 1.125, 0.75, {ease: FlxEase.backIn, onUpdate: (s:FlxTween)->{
+                    defaultCamZoom = s.value;
+                }});
+            case 'pre':
+                for(s in [playHUD.timeBar, playHUD.scoreTxt, playHUD.timeTxt]){ FlxTween.tween(s, {alpha: 0}, 2, {ease: FlxEase.quadIn}); }
+                modManager.queueEase(curStep, curStep + 6, "alpha", 1, 0);
+
+                camZoomLock = true;
+                defaultCamZoom = 0.5;
+            case 'die':
+                blackScreen.alpha = 1;
+                FlxTween.num(0, 1, 4, {ease: FlxEase.quadIn, onUpdate: function(shit2:FlxTween){
+                    modManager.setValue("alpha", shit2.value, 0);
+                }});
+            case 'txt':
+                lyrics.text = value2;
+                lyrics.screenCenter(FlxAxes.X);
+            case 'break mirror':
+                mirror.loadGraphic(Paths.image('bg/broken_mirror'));
+                FlxTween.num(255, 0, 1.75, {ease: FlxEase.quadOut, onUpdate: function(twn){ mirror.setColorTransform(1,1,1,1,twn.value,twn.value,twn.value,0); } } );
+                camGame.shake(0.01, 0.25);
+                FlxG.sound.play(Paths.sound("mirror_break"));
+                
+
+        }
+    }
+}

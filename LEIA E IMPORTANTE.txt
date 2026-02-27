@@ -1,0 +1,24 @@
+olha esse repositório ou projeto e o mod hit single real
+se caso for usar de os créditos ao
+@DoomGames-k5r e ao @RAnder8840
+otimizaçao mobile.         codigo e ajustes.
+
+todos os adicionais
+png to opt
+pastas organizadas 
+menos consumo de ram
+dica ou ordem importante:pastas ou arquivos 
+desnecessário nao podem ser
+gerados na compilaçao final do apk para menos peso
+do apk
+esses tipos de pastas ou arquivos inuteis sao
+pasta:SHADERS
+arquivos:OS ARQUIVOS ORIGINAIS DE FNF EXCETO NOTE_ASSETS E NOTE SPLASH
+pasta:CHARACTERS SO DO LOCAL ASSETS O DO MOD DEIXA NORMAL
+pasta:CUSTOM EVENTS
+e so isso nao e pea excluir va no local de project.xml na raiz
+e coloca exclude nessas opçoes voce que e programador sabe do que eu to falando
+para que na hora do apk ser gerado no final nao pese muito com mb
+avisando o menu do mod nao esta disponível por causa de falta de arquivos source
+A E BRENO E QUANDO VOCE MEXER COLOCA SUPORTE A ASTC COM OUTRO NOME
+.optpng 👍 

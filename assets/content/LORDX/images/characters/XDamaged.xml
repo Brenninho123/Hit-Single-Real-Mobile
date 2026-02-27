@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="XDamaged.png" width="4805" height="4363">
+	<SubTexture name="XDamaged Idle0000" x="831" y="0" width="417" height="745" frameX="-286" frameY="-168" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0001" x="1267" y="1490" width="417" height="744" frameX="-286" frameY="-169" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0002" x="831" y="745" width="417" height="745" frameX="-286" frameY="-168" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0003" x="415" y="770" width="416" height="745" frameX="-287" frameY="-168" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0004" x="1248" y="0" width="416" height="745" frameX="-288" frameY="-168" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0005" x="0" y="1531" width="418" height="745" frameX="-288" frameY="-168" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0006" x="418" y="1515" width="421" height="745" frameX="-288" frameY="-168" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0007" x="1680" y="745" width="425" height="744" frameX="-288" frameY="-169" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0008" x="839" y="1490" width="428" height="745" frameX="-288" frameY="-168" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0009" x="1248" y="745" width="432" height="745" frameX="-288" frameY="-168" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0010" x="2076" y="0" width="435" height="744" frameX="-288" frameY="-169" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Idle0011" x="1684" y="1489" width="440" height="743" frameX="-286" frameY="-170" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0000" x="3444" y="2062" width="476" height="685" frameX="-203" frameY="-231" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0001" x="1499" y="2958" width="502" height="687" frameX="-187" frameY="-230" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0002" x="2001" y="2956" width="493" height="687" frameX="-196" frameY="-232" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0006" x="3444" y="1376" width="482" height="686" frameX="-203" frameY="-233" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0007" x="2494" y="2805" width="490" height="687" frameX="-205" frameY="-232" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0008" x="3473" y="0" width="495" height="687" frameX="-211" frameY="-232" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0010" x="2195" y="2115" width="518" height="690" frameX="-208" frameY="-229" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0011" x="2959" y="0" width="514" height="690" frameX="-208" frameY="-229" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0012" x="0" y="3002" width="503" height="689" frameX="-208" frameY="-230" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0013" x="2948" y="723" width="495" height="690" frameX="-208" frameY="-229" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0014" x="2955" y="1413" width="489" height="690" frameX="-209" frameY="-229" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0015" x="2955" y="2103" width="486" height="690" frameX="-213" frameY="-229" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0016" x="503" y="2986" width="494" height="689" frameX="-214" frameY="-230" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Left0017" x="997" y="2960" width="502" height="689" frameX="-213" frameY="-230" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0000" x="2984" y="2793" width="445" height="672" frameX="-368" frameY="-241" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0001" x="2984" y="3465" width="428" height="664" frameX="-392" frameY="-249" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0002" x="3968" y="664" width="427" height="663" frameX="-395" frameY="-250" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0006" x="3926" y="1327" width="430" height="663" frameX="-395" frameY="-250" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0007" x="3926" y="1990" width="426" height="663" frameX="-395" frameY="-250" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0008" x="2256" y="3643" width="424" height="665" frameX="-395" frameY="-248" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0010" x="3901" y="3314" width="428" height="661" frameX="-395" frameY="-252" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0011" x="4328" y="2653" width="432" height="661" frameX="-395" frameY="-252" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0012" x="3968" y="0" width="429" height="664" frameX="-395" frameY="-249" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0013" x="3429" y="3420" width="429" height="665" frameX="-387" frameY="-248" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0014" x="1819" y="3645" width="437" height="668" frameX="-375" frameY="-245" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0015" x="919" y="3675" width="449" height="669" frameX="-363" frameY="-244" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0016" x="1368" y="3649" width="451" height="669" frameX="-356" frameY="-244" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0017" x="0" y="3691" width="456" height="672" frameX="-343" frameY="-241" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0018" x="456" y="3691" width="463" height="672" frameX="-333" frameY="-241" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Right0019" x="3441" y="2747" width="460" height="673" frameX="-336" frameY="-240" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0000" x="0" y="2276" width="426" height="726" frameX="-272" frameY="-203" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0001" x="411" y="0" width="420" height="770" frameX="-261" frameY="-162" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0002" x="0" y="0" width="411" height="771" frameX="-256" frameY="-161" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0006" x="0" y="771" width="415" height="760" frameX="-252" frameY="-172" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0007" x="1664" y="0" width="412" height="745" frameX="-255" frameY="-186" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0008" x="2105" y="744" width="412" height="731" frameX="-257" frameY="-199" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0010" x="1311" y="2234" width="439" height="724" frameX="-260" frameY="-205" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0011" x="1750" y="2232" width="445" height="724" frameX="-264" frameY="-205" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0012" x="868" y="2235" width="443" height="725" frameX="-267" frameY="-204" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0013" x="2517" y="0" width="442" height="723" frameX="-266" frameY="-206" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Up0014" x="426" y="2260" width="442" height="726" frameX="-265" frameY="-203" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Down0000" x="4397" y="633" width="405" height="616" frameX="-352" frameY="-293" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Down0001" x="4397" y="0" width="408" height="633" frameX="-352" frameY="-276" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Down0002" x="3920" y="2653" width="408" height="661" frameX="-348" frameY="-249" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Down0006" x="2517" y="723" width="431" height="699" frameX="-325" frameY="-213" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Down0007" x="2517" y="1422" width="438" height="693" frameX="-320" frameY="-219" frameWidth="1050" frameHeight="1050"/>
+	<SubTexture name="XDamaged Down0008" x="3443" y="690" width="440" height="686" frameX="-319" frameY="-226" frameWidth="1050" frameHeight="1050"/>
+</TextureAtlas>

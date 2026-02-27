@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<!-- ======================== Application Settings ======================== -->
+
+	<app 
+		title="FNF: Hit Single Real"
+		file="HitSingleReal"
+		packageName="com.fnf.hitsingle"
+		package="com.fnf.hitsingle"
+		main="Main"
+		version="0.2.7"
+		company="ShadowMario"
+	/>
+
+	<set name="APP_ID" value="com.fnf.hitsingle" />
+
+	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/>
+
+	<app preloader="flixel.system.FlxPreloader" />
+
+	<set name="SWF_VERSION" value="11.8" />
+
+	<!-- ============================ Window Settings ============================ -->
+
+	<window width="1280" height="720" fps="60" background="#000000" hardware="true" vsync="false" />
+
+	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true"/>
+
+	<window if="android" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+
+	<!-- ============================ Path Settings ============================ -->
+
+	<classpath name="source" />
+	<setenv name="HAXEPATH" value="./"/>
+
+	<set name="BUILD_DIR" value="export/debug" if="debug" />
+	<set name="BUILD_DIR" value="export/release" unless="debug" />
+
+	<!-- ============================ Engine Config ============================ -->
+
+	<define name="MODS_ALLOWED" if="desktop" />
+	<define name="LUA_ALLOWED" if="cpp" />
+	<define name="VIDEOS_ALLOWED" if="cpp desktop"/>
+	<define name="DISCORD_ALLOWED" if="desktop" />
+
+	<assets path='assets/embeds' rename='assets' embed="true" />
+	<assets path="assets/game" rename="assets"/>
+	<assets path='content' embed='false' if="MODS_ALLOWED"/>
+
+	<!-- ============================ Android Config ============================ -->
+
+	<section if="android">
+
+		<set name="ANDROID_MIN_API_LEVEL" value="21"/>
+		<set name="ANDROID_TARGET_API_LEVEL" value="34"/>
+		<set name="ANDROID_COMPILE_SDK_VERSION" value="34"/>
+		<set name="ANDROID_BUILD_TOOLS_VERSION" value="34.0.0"/>
+
+		<android permission="android.permission.INTERNET"/>
+		<android permission="android.permission.VIBRATE"/>
+
+		<!-- Scoped Storage (Android 13+) -->
+		<android permission="android.permission.READ_MEDIA_AUDIO"/>
+		<android permission="android.permission.READ_MEDIA_IMAGES"/>
+		<android permission="android.permission.READ_MEDIA_VIDEO"/>
+
+		<!-- Legacy fallback -->
+		<android permission="android.permission.READ_EXTERNAL_STORAGE" />
+		<android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+		<icon path="projFiles/icon/icon16.png" size="36" />
+		<icon path="projFiles/icon/icon32.png" size="48" />
+		<icon path="projFiles/icon/icon64.png" size="72" />
+		<icon path="projFiles/icon/iconOG.png" size="96" />
+
+	</section>
+
+	<!-- ============================ Haxe Libraries ============================ -->
+
+	<haxelib name="openfl"/>
+
+	<haxelib name="flixel"/>
+	<haxelib name="flixel-addons"/>
+	<haxelib name="flixel-ui"/>
+	<haxelib name="flxanimate"/>
+
+	<haxelib name="haxeui-core" />
+	<haxelib name="haxeui-flixel" />
+	<haxelib name="hscript-iris"/>
+
+	<!-- 🔥 ANDROID TOOLS EXTENSION -->
+	<haxelib name="extension-androidtools" if="android"/>
+
+	<!-- Desktop Only -->
+	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
+	<haxelib name="discord_rpc" if="DISCORD_ALLOWED"/>
+	<haxelib name="hxvlc" if="VIDEOS_ALLOWED"/>
+
+	<!-- ============================ Macros ============================ -->
+
+	<haxeflag name="--macro" value="addMetadata('@:build(funkin.backend.macro.FlxMacro.buildFlxSprite())', 'flixel.FlxSprite')" />
+	<haxeflag name="--macro" value="addMetadata('@:build(funkin.backend.macro.FlxMacro.buildFlxBasic())', 'flixel.FlxBasic')" />
+	<haxeflag name="--macro" value="include('funkin')" />
+	<haxeflag name="-dce no" />
+
+	<!-- ============================ Haxedefines ============================ -->
+
+	<haxedef name="haxeui_dont_impose_base_class"/>
+	<define name="hscriptPos"/>
+
+	<haxedef name="NO_PRECOMPILED_HEADERS" if="LUA_ALLOWED"/>
+	<haxedef name="FLX_NO_HEALTH" />
+	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	<haxedef name="message.reporting" value="pretty" />
+	<haxedef name="no-deprecation-warnings"/>
+
+	<!-- ============================ Icons ============================ -->
+
+	<icon path="projFiles/icon/icon16.png" size='16'/>
+	<icon path="projFiles/icon/icon32.png" size='32'/>
+	<icon path="projFiles/icon/icon64.png" size='64'/>
+	<icon path="projFiles/icon/iconOG.png" />
+
+</project>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="thecursed.png" width="1556" height="1464">
+	<SubTexture name="CursedDown0000" x="1112" y="927" width="348" height="413" frameX="-0" frameY="-20" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedDown0001" x="1112" y="927" width="348" height="413" frameX="-0" frameY="-20" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedDown0002" x="760" y="941" width="347" height="422" frameX="-0" frameY="-11" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedDown0003" x="760" y="941" width="347" height="422" frameX="-0" frameY="-11" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedDown0004" x="760" y="941" width="347" height="422" frameX="-0" frameY="-11" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedDown0005" x="760" y="941" width="347" height="422" frameX="-0" frameY="-11" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedDown0006" x="760" y="941" width="347" height="422" frameX="-0" frameY="-11" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedDown0007" x="760" y="941" width="347" height="422" frameX="-0" frameY="-11" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedDown0008" x="760" y="941" width="347" height="422" frameX="-0" frameY="-11" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedDown0009" x="760" y="941" width="347" height="422" frameX="-0" frameY="-11" frameWidth="348" frameHeight="433"/>
+	<SubTexture name="CursedIdle0000" x="929" y="1" width="279" height="458" frameX="-9" frameY="-11" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0001" x="929" y="1" width="279" height="458" frameX="-9" frameY="-11" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0002" x="929" y="464" width="276" height="458" frameX="-10" frameY="-11" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0003" x="929" y="464" width="276" height="458" frameX="-10" frameY="-11" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0004" x="644" y="472" width="279" height="464" frameX="-3" frameY="-5" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0005" x="644" y="1" width="280" height="466" frameX="-2" frameY="-3" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0006" x="1" y="536" width="281" height="468" frameX="-1" frameY="-1" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0007" x="1" y="536" width="281" height="468" frameX="-1" frameY="-1" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0008" x="1" y="536" width="281" height="468" frameX="-1" frameY="-1" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0009" x="287" y="536" width="282" height="468" frameX="-0" frameY="-1" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0010" x="287" y="536" width="282" height="468" frameX="-0" frameY="-1" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0011" x="287" y="536" width="282" height="468" frameX="-0" frameY="-1" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0012" x="287" y="536" width="282" height="468" frameX="-0" frameY="-1" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedIdle0013" x="287" y="536" width="282" height="468" frameX="-0" frameY="-1" frameWidth="288" frameHeight="470"/>
+	<SubTexture name="CursedLeft0000" x="1" y="1009" width="374" height="454" frameX="-0" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedLeft0001" x="1" y="1009" width="374" height="454" frameX="-0" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedLeft0002" x="380" y="1009" width="375" height="454" frameX="-6" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedLeft0003" x="380" y="1009" width="375" height="454" frameX="-6" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedLeft0004" x="380" y="1009" width="375" height="454" frameX="-6" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedLeft0005" x="380" y="1009" width="375" height="454" frameX="-6" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedLeft0006" x="380" y="1009" width="375" height="454" frameX="-6" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedLeft0007" x="380" y="1009" width="375" height="454" frameX="-6" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedLeft0008" x="380" y="1009" width="375" height="454" frameX="-6" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedLeft0009" x="380" y="1009" width="375" height="454" frameX="-6" frameY="-1" frameWidth="381" frameHeight="455"/>
+	<SubTexture name="CursedRight0000" x="1213" y="1" width="342" height="416" frameX="-11" frameY="-0" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedRight0001" x="1213" y="1" width="342" height="416" frameX="-11" frameY="-0" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedRight0002" x="1213" y="422" width="340" height="415" frameX="-0" frameY="-1" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedRight0003" x="1213" y="422" width="340" height="415" frameX="-0" frameY="-1" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedRight0004" x="1213" y="422" width="340" height="415" frameX="-0" frameY="-1" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedRight0005" x="1213" y="422" width="340" height="415" frameX="-0" frameY="-1" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedRight0006" x="1213" y="422" width="340" height="415" frameX="-0" frameY="-1" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedRight0007" x="1213" y="422" width="340" height="415" frameX="-0" frameY="-1" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedRight0008" x="1213" y="422" width="340" height="415" frameX="-0" frameY="-1" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedRight0009" x="1213" y="422" width="340" height="415" frameX="-0" frameY="-1" frameWidth="353" frameHeight="416"/>
+	<SubTexture name="CursedUp0000" x="1" y="1" width="315" height="530" frameX="-0" frameY="-0" frameWidth="324" frameHeight="530"/>
+	<SubTexture name="CursedUp0001" x="1" y="1" width="315" height="530" frameX="-0" frameY="-0" frameWidth="324" frameHeight="530"/>
+	<SubTexture name="CursedUp0002" x="321" y="1" width="318" height="522" frameX="-6" frameY="-8" frameWidth="324" frameHeight="530"/>
+	<SubTexture name="CursedUp0003" x="321" y="1" width="318" height="522" frameX="-6" frameY="-8" frameWidth="324" frameHeight="530"/>
+	<SubTexture name="CursedUp0004" x="321" y="1" width="318" height="522" frameX="-6" frameY="-8" frameWidth="324" frameHeight="530"/>
+	<SubTexture name="CursedUp0005" x="321" y="1" width="318" height="522" frameX="-6" frameY="-8" frameWidth="324" frameHeight="530"/>
+	<SubTexture name="CursedUp0006" x="321" y="1" width="318" height="522" frameX="-6" frameY="-8" frameWidth="324" frameHeight="530"/>
+	<SubTexture name="CursedUp0007" x="321" y="1" width="318" height="522" frameX="-6" frameY="-8" frameWidth="324" frameHeight="530"/>
+	<SubTexture name="CursedUp0008" x="321" y="1" width="318" height="522" frameX="-6" frameY="-8" frameWidth="324" frameHeight="530"/>
+	<SubTexture name="CursedUp0009" x="321" y="1" width="318" height="522" frameX="-6" frameY="-8" frameWidth="324" frameHeight="530"/>
+</TextureAtlas>

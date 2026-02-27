@@ -1,0 +1,35 @@
+{
+	"storyName": "TRICHAEL",
+	"hideFreeplay": false,
+	"weekBackground": "bruh",
+	"difficulties": "Normal",
+	"weekBefore": "",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"bf",
+		""
+	],
+	"songs": [
+		[
+			"Trichael",
+			"hell",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"Joyous",
+			"real",
+			[
+				146,
+				113,
+				253
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "DECAY"
+}

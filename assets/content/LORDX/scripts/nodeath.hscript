@@ -1,0 +1,3 @@
+function onUpdate(elapsed){
+    game.health = 1;
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="heart.png" width="219" height="941">
+	<SubTexture name="emptyheart anim0000" x="108" y="113" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0001" x="108" y="113" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0002" x="116" y="1" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0003" x="116" y="1" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0004" x="108" y="217" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0005" x="108" y="217" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0006" x="1" y="218" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0007" x="1" y="218" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0008" x="108" y="321" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0009" x="108" y="321" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0010" x="108" y="321" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0011" x="1" y="322" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0012" x="1" y="322" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0013" x="1" y="322" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0014" x="1" y="322" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0015" x="108" y="321" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0016" x="108" y="321" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0017" x="108" y="321" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="emptyheart anim0018" x="108" y="321" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0000" x="108" y="425" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0001" x="108" y="425" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0002" x="1" y="426" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0003" x="1" y="426" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0004" x="108" y="529" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0005" x="108" y="529" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0006" x="1" y="530" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0007" x="1" y="530" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0008" x="108" y="633" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0009" x="108" y="633" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0010" x="108" y="633" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0011" x="1" y="634" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0012" x="1" y="634" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0013" x="1" y="634" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0014" x="1" y="634" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0015" x="108" y="633" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0016" x="108" y="633" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0017" x="108" y="633" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="halfheart anim0018" x="108" y="633" width="102" height="99" frameX="-0" frameY="-0" frameWidth="102" frameHeight="99"/>
+	<SubTexture name="heart anim0000" x="1" y="842" width="99" height="96" frameX="-5" frameY="-5" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0001" x="1" y="842" width="99" height="96" frameX="-5" frameY="-5" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0002" x="1" y="1" width="110" height="107" frameX="-0" frameY="-0" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0003" x="1" y="1" width="110" height="107" frameX="-0" frameY="-0" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0004" x="1" y="113" width="102" height="100" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0005" x="1" y="113" width="102" height="100" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0006" x="108" y="737" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0007" x="108" y="737" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0008" x="1" y="738" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0009" x="1" y="738" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0010" x="1" y="738" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0011" x="108" y="841" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0012" x="108" y="841" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0013" x="108" y="841" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0014" x="108" y="841" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0015" x="1" y="738" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0016" x="1" y="738" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0017" x="1" y="738" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+	<SubTexture name="heart anim0018" x="1" y="738" width="102" height="99" frameX="-4" frameY="-4" frameWidth="110" frameHeight="107"/>
+</TextureAtlas>

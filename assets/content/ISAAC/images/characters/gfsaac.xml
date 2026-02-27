@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.1.3 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="gfsaac.png" width="1675" height="1690">
+	<SubTexture name="GFIdle0000" x="841" y="1124" width="417" height="563" frameX="-14" frameY="-2" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0001" x="841" y="1124" width="417" height="563" frameX="-14" frameY="-2" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0002" x="841" y="1124" width="417" height="563" frameX="-14" frameY="-2" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0003" x="845" y="0" width="416" height="561" frameX="-8" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0004" x="845" y="0" width="416" height="561" frameX="-8" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0005" x="845" y="0" width="416" height="561" frameX="-8" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0006" x="0" y="1128" width="420" height="562" frameX="-2" frameY="-3" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0007" x="0" y="1128" width="420" height="562" frameX="-2" frameY="-3" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0008" x="0" y="1128" width="420" height="562" frameX="-2" frameY="-3" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0009" x="0" y="0" width="421" height="565" frameX="-0" frameY="-0" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0010" x="0" y="0" width="421" height="565" frameX="-0" frameY="-0" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0011" x="0" y="0" width="421" height="565" frameX="-0" frameY="-0" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0012" x="0" y="0" width="421" height="565" frameX="-0" frameY="-0" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0013" x="1258" y="1124" width="417" height="563" frameX="-5" frameY="-2" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0014" x="1258" y="1124" width="417" height="563" frameX="-5" frameY="-2" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0015" x="843" y="561" width="420" height="563" frameX="-13" frameY="-2" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0016" x="843" y="561" width="420" height="563" frameX="-13" frameY="-2" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0017" x="843" y="561" width="420" height="563" frameX="-13" frameY="-2" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0018" x="421" y="0" width="424" height="561" frameX="-18" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0019" x="421" y="0" width="424" height="561" frameX="-18" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0020" x="421" y="0" width="424" height="561" frameX="-18" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0021" x="421" y="561" width="422" height="562" frameX="-22" frameY="-3" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0022" x="421" y="561" width="422" height="562" frameX="-22" frameY="-3" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0023" x="421" y="561" width="422" height="562" frameX="-22" frameY="-3" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0024" x="420" y="1123" width="421" height="561" frameX="-24" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0025" x="420" y="1123" width="421" height="561" frameX="-24" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0026" x="420" y="1123" width="421" height="561" frameX="-24" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0027" x="420" y="1123" width="421" height="561" frameX="-24" frameY="-4" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0028" x="0" y="565" width="420" height="563" frameX="-23" frameY="-2" frameWidth="446" frameHeight="565"/>
+	<SubTexture name="GFIdle0029" x="0" y="565" width="420" height="563" frameX="-23" frameY="-2" frameWidth="446" frameHeight="565"/>
+</TextureAtlas>
