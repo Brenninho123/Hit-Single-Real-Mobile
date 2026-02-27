@@ -1,18 +1,16 @@
-name: Android Build
+name: Android Release Build
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  build-android:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Java 17
@@ -27,8 +25,19 @@ jobs:
           haxe-version: 4.3.2
 
       - name: Setup haxelib
+        run: haxelib setup ~/haxelib
+
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Licenses
+        run: yes | sdkmanager --licenses
+
+      - name: Install SDK Components
         run: |
-          haxelib setup ~/haxelib
+          sdkmanager "platform-tools"
+          sdkmanager "platforms;android-34"
+          sdkmanager "build-tools;34.0.0"
 
       - name: Install Haxe Libraries
         run: |
@@ -38,28 +47,26 @@ jobs:
           haxelib install flixel-addons
           haxelib install flixel-ui
           haxelib install hxcpp
+          haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate
+          haxelib install haxeui-core
+          haxelib install haxeui-flixel
+          haxelib install hscript-iris
+          haxelib install extension-androidtools
           haxelib run lime setup
           haxelib run openfl setup
           haxelib run lime rebuild hxcpp
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Accept Licenses
-        run: yes | sdkmanager --licenses
-
-      - name: Install Android Build Tools
+      - name: Create Missing Folders (CI Fix)
         run: |
-          sdkmanager "platform-tools"
-          sdkmanager "platforms;android-33"
-          sdkmanager "build-tools;33.0.2"
+          mkdir -p assets
+          mkdir -p content
+          mkdir -p projFiles/icon
 
-      - name: Build APK (Release)
-        run: |
-          haxelib run lime build android -release
+      - name: Build Release APK
+        run: haxelib run lime build android -release
 
-      - name: Upload APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Android-APK
+          name: HitSingleReal-Android
           path: export/android/bin/app/build/outputs/apk/release/*.apk
