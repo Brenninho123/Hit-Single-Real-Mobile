@@ -1,206 +1,200 @@
 package funkin;
 
 import haxe.Json;
+
+import openfl.system.System;
 import openfl.utils.AssetType;
 import openfl.utils.Assets;
+import openfl.display.BitmapData;
+import openfl.media.Sound;
+
+import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.FlxGraphic;
-import flixel.FlxG;
 
 #if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
 
-#if android
-import lime.system.System;
-#end
-
 class Paths
 {
-	public static inline final CORE_DIRECTORY = "assets";
-	public static inline final MODS_DIRECTORY = "assets/content";
-
+	#if ASSET_REDIRECT
+	public static inline final trail = #if macos '../../../../../../../' #else '../../../../' #end;
+	#end
+	
+	public static inline final CORE_DIRECTORY = #if ASSET_REDIRECT trail + 'assets/game' #else 'assets' #end;
+	public static inline final MODS_DIRECTORY = #if ASSET_REDIRECT trail + 'content' #else 'content' #end;
+	
 	public static inline final SOUND_EXT = "ogg";
 	public static inline final VIDEO_EXT = "mp4";
-
+	
 	public static var currentLevel:Null<String> = null;
-
-	/* ========================= STORAGE ========================= */
-
-	public static function getAndroidStoragePath():String
-	{
-		#if android
-		return System.applicationStorageDirectory + "/mods/";
-		#else
-		return MODS_DIRECTORY + "/";
-		#end
-	}
-
-	/* ========================= CORE ========================= */
-
+	
 	public static function setCurrentLevel(?name:String):Void
 	{
 		currentLevel = name != null ? name.toLowerCase() : null;
 	}
-
-	public static function getPrimaryPath():String
-	{
-		return CORE_DIRECTORY;
-	}
-
-	public static function getPath(file:String, ?type:AssetType = TEXT, ?library:String, checkMods:Bool = false):String
+	
+	public static function getPath(file:String, ?type:AssetType = TEXT, ?parentFolder:String, checkMods:Bool = false):String
 	{
 		#if MODS_ALLOWED
+		#if sys
 		if (checkMods)
 		{
-			var modPath = modFolders(file);
-			if (fileExists(modPath))
-				return modPath;
+			final modPath:String = modFolders(parentFolder == null ? file : parentFolder + '/' + file);
+			if (FileSystem.exists(modPath)) return modPath;
 		}
 		#end
-
-		if (library != null)
-			return '$CORE_DIRECTORY/$library/$file';
-
+		#end
+		
+		if (parentFolder != null) return getLibraryPath(file, parentFolder);
+		
+		if (currentLevel != null)
+		{
+			var levelPath:String = getLibraryPathForce(file, currentLevel);
+			if (Assets.exists(levelPath, type)) return levelPath;
+		}
+		
+		return getPrimaryPath(file);
+	}
+	
+	public static function getLibraryPath(file:String, parentFolder:Null<String>):String
+	{
+		return parentFolder == null ? getPrimaryPath(file) : getLibraryPathForce(file, parentFolder);
+	}
+	
+	static inline function getLibraryPathForce(file:String, library:String):String
+	{
+		return '$CORE_DIRECTORY/$library/$file';
+	}
+	
+	public static inline function getPrimaryPath(file:String = ''):String
+	{
 		return '$CORE_DIRECTORY/$file';
 	}
-
-	public static function fileExists(path:String):Bool
+	
+	public static inline function txt(key:String, ?library:String):String
 	{
-		#if sys
-		return FileSystem.exists(path);
-		#else
-		return Assets.exists(path);
-		#end
-	}
-
-	public static function getTextFromFile(path:String):String
-	{
-		#if sys
-		if (FileSystem.exists(path))
-			return File.getContent(path);
-		#end
-
-		if (Assets.exists(path))
-			return Assets.getText(path);
-
-		return "";
-	}
-
-	/* ========================= BASIC ASSETS ========================= */
-
-	public static inline function txt(key:String, ?library:String)
 		return getPath('data/$key.txt', TEXT, library, true);
-
-	public static inline function json(key:String, ?library:String)
-		return getPath('data/$key.json', TEXT, library, true);
-
-	public static inline function image(key:String, ?library:String, allowGPU:Bool = true):Null<FlxGraphic>
-	{
-		return FunkinAssets.getGraphic(getPath('images/$key.png', IMAGE, library, true), true, allowGPU);
 	}
-
-	public static inline function font(key:String):String
+	
+	public static inline function xml(key:String, ?library:String):String
 	{
-		return getPath('fonts/$key.ttf', FONT, null, true);
+		return getPath('data/$key.xml', TEXT, library, true);
 	}
-
-	public static inline function sound(key:String, ?library:String)
+	
+	public static inline function json(key:String, ?library:String):String
 	{
-		return FunkinAssets.getSound(getPath('sounds/$key.$SOUND_EXT', SOUND, library, true));
+		return getPath('songs/$key.json', TEXT, library, true);
 	}
-
-	public static inline function music(key:String, ?library:String)
+	
+	public static inline function noteskin(key:String, ?library:String):String
 	{
-		return FunkinAssets.getSound(getPath('music/$key.$SOUND_EXT', SOUND, library, true));
+		return getPath('noteskins/$key.json', TEXT, library, true);
 	}
-
-	public static inline function soundRandom(key:String, min:Int, max:Int)
+	
+	public static inline function shaderFrag(key:String):String
 	{
-		var random = FlxG.random.int(min, max);
-		return sound(key + random);
-	}
-
-	public static inline function voices(song:String)
-	{
-		return FunkinAssets.getSound(getPath('songs/${formatToSongPath(song)}/Voices.$SOUND_EXT', SOUND, null, true));
-	}
-
-	public static inline function inst(song:String)
-	{
-		return FunkinAssets.getSound(getPath('songs/${formatToSongPath(song)}/Inst.$SOUND_EXT', SOUND, null, true));
-	}
-
-	/* ========================= ATLASES ========================= */
-
-	public static function textureAtlas(key:String, ?library:String):FlxAtlasFrames
-	{
-		return getSparrowAtlas(key, library);
-	}
-
-	public static function getSparrowAtlas(key:String, ?library:String, allowGPU:Bool = true):FlxAtlasFrames
-	{
-		var xmlPath = getPath('images/$key.xml', TEXT, library, true);
-		var img = image(key, library, allowGPU);
-		return FlxAtlasFrames.fromSparrow(img, getTextFromFile(xmlPath));
-	}
-
-	/* ========================= SHADERS ========================= */
-
-	public static inline function shaderFrag(key:String)
 		return getPath('shaders/$key.frag', TEXT, null, true);
-
-	public static inline function shaderVert(key:String)
-		return getPath('shaders/$key.vert', TEXT, null, true);
-
-	/* ========================= NOTESKINS ========================= */
-
-	public static inline function noteskin(key:String)
-		return getPath('images/noteskins/$key.png', IMAGE, null, true);
-
-	public static inline function modsNoteskin(key:String)
-		return modFolders('images/noteskins/$key.png');
-
-	/* ========================= MODS ========================= */
-
-	#if MODS_ALLOWED
-
-	public static inline function mods(key:String = ''):String
-	{
-		return getAndroidStoragePath() + key;
 	}
-
-	public static function modFolders(key:String):String
+	
+	public static inline function shaderVert(key:String):String
 	{
-		var base = getAndroidStoragePath();
-
+		return getPath('shaders/$key.vert', TEXT, null, true);
+	}
+	
+	public static inline function lua(key:String, ?library:String):String
+	{
+		return getPath('$key.lua', TEXT, library);
+	}
+	
+	static public function video(key:String):String
+	{
+		return '$CORE_DIRECTORY/videos/$key.$VIDEO_EXT';
+	}
+	
+	static public function textureAtlas(key:String, ?library:String):String
+	{
+		return getPath('images/$key', AssetType.BINARY, library, true);
+	}
+	
+	static public function sound(key:String, ?library:String):Null<Sound>
+	{
+		final path = getPath('sounds/$key.$SOUND_EXT', SOUND, library, true);
+		return Assets.exists(path) ? Assets.getSound(path) : null;
+	}
+	
+	public static inline function soundRandom(key:String, min:Int, max:Int, ?library:String):Null<Sound>
+	{
+		return sound(key + FlxG.random.int(min, max), library);
+	}
+	
+	public static inline function music(key:String, ?library:String):Null<Sound>
+	{
+		final path = getPath('music/$key.$SOUND_EXT', SOUND, library, true);
+		return Assets.exists(path) ? Assets.getSound(path) : null;
+	}
+	
+	public static inline function voices(song:String):Null<Sound>
+	{
+		var songKey:String = '${formatToSongPath(song)}/Voices';
+		songKey = getPath('songs/$songKey.$SOUND_EXT', SOUND, null, true);
+		return Assets.exists(songKey) ? Assets.getSound(songKey) : null;
+	}
+	
+	public static inline function inst(song:String):Null<Sound>
+	{
+		var songKey:String = '${formatToSongPath(song)}/Inst';
+		songKey = getPath('songs/$songKey.$SOUND_EXT', SOUND, null, true);
+		return Assets.exists(songKey) ? Assets.getSound(songKey) : null;
+	}
+	
+	public static inline function image(key:String, ?library:String):Null<FlxGraphic>
+	{
+		final path = getPath('images/$key.png', IMAGE, library, true);
+		return Assets.exists(path) ? FlxGraphic.fromBitmapData(Assets.getBitmapData(path)) : null;
+	}
+	
+	static public function getTextFromFile(key:String, ignoreMods:Bool = false):String
+	{
+		#if MODS_ALLOWED
 		#if sys
-		if (FileSystem.exists(base))
+		if (!ignoreMods)
 		{
-			for (folder in FileSystem.readDirectory(base))
-			{
-				var path = base + folder + '/' + key;
-				if (FileSystem.exists(path))
-					return path;
-			}
+			var modPath = modFolders(key);
+			if (FileSystem.exists(modPath))
+				return File.getContent(modPath);
 		}
 		#end
-
-		return base + key;
+		#end
+		
+		var path = getPath(key, TEXT);
+		return Assets.exists(path) ? Assets.getText(path) : null;
 	}
-
-	public static inline function modsJson(key:String)
-	{
-		return modFolders('data/$key.json');
-	}
-
-	#end
-
-	/* ========================= UTIL ========================= */
-
+	
 	public static inline function formatToSongPath(path:String):String
 	{
-		return path.toLowerCase().replace(" ", "-");
+		return path.toLowerCase().replace(' ', '-');
 	}
+	
+	#if MODS_ALLOWED
+	public static inline function mods(key:String = ''):String
+	{
+		return '$MODS_DIRECTORY/' + key;
+	}
+	
+	static public function modFolders(key:String):String
+	{
+		#if sys
+		for (mod in Mods.globalMods)
+		{
+			var fileToCheck:String = mods(mod + '/' + key);
+			if (FileSystem.exists(fileToCheck)) return fileToCheck;
+		}
+		#end
+		
+		return '$MODS_DIRECTORY/' + key;
+	}
+	#end
 }
