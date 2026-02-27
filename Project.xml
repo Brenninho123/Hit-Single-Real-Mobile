@@ -46,7 +46,7 @@
 	<define name="DISCORD_ALLOWED" if="desktop" />
 
 	<assets path="assets" />
-	<assets path="assets/game" rename="assets"/>
+	<assets path="assets" />
 	<assets path='content' embed='false' if="MODS_ALLOWED"/>
 
 	<!-- ============================ Android Config ============================ -->
