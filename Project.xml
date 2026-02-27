@@ -45,7 +45,7 @@
 	<define name="VIDEOS_ALLOWED" if="cpp desktop"/>
 	<define name="DISCORD_ALLOWED" if="desktop" />
 
-	<assets path='assets/embeds' rename='assets' embed="true" />
+	<assets path="assets" />
 	<assets path="assets/game" rename="assets"/>
 	<assets path='content' embed='false' if="MODS_ALLOWED"/>
 
