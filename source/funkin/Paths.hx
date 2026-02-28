@@ -54,6 +54,37 @@ class Paths
 		return '$CORE_DIRECTORY/$file';
 	}
 
+	// Retorna o caminho primário como string pura
+	// Quando chamado sem argumentos, retorna o diretório raiz de mods
+	public static function getPrimaryPath(?key:String, ?library:String):String
+	{
+		if (key == null || key.length == 0)
+		{
+			#if MODS_ALLOWED
+			return mods();
+			#else
+			return CORE_DIRECTORY + '/';
+			#end
+		}
+
+		#if MODS_ALLOWED
+		#if sys
+		var modPath = modFolders(key);
+		if (FileSystem.exists(modPath)) return modPath;
+		#end
+		#end
+
+		return getPath(key, TEXT, library);
+	}
+
+	// Força um caminho de biblioteca específica
+	public static function getLibraryPathForce(key:String, ?library:String):String
+	{
+		if (library != null && library.length > 0)
+			return '$CORE_DIRECTORY/$library/$key';
+		return '$CORE_DIRECTORY/$key';
+	}
+
 	public static inline function txt(key:String, ?library:String):String
 		return getPath('data/$key.txt', TEXT, library, true);
 
@@ -75,6 +106,11 @@ class Paths
 		return Assets.exists(path) ? Assets.getSound(path) : null;
 	}
 
+	public static function soundRandom(key:String, min:Int, max:Int, ?library:String):Null<Sound>
+	{
+		return sound(key + FlxG.random.int(min, max), library);
+	}
+
 	public static function music(key:String, ?library:String):Null<Sound>
 	{
 		var path = getPath('music/$key.$SOUND_EXT', SOUND, library, true);
@@ -89,33 +125,36 @@ class Paths
 
 	public static function getSparrowAtlas(key:String, ?library:String):FlxAtlasFrames
 	{
-		var xml = getPath('images/$key.xml', TEXT, library, true);
+		var xmlPath = getPath('images/$key.xml', TEXT, library, true);
 		var img = image(key, library);
-		return FlxAtlasFrames.fromSparrow(img, Assets.getText(xml));
+		return FlxAtlasFrames.fromSparrow(img, Assets.getText(xmlPath));
 	}
 
-	public static function formatToSongPath(path:String):String
-		return path.toLowerCase().replace(" ", "-");
-
-	// ================= MÉTODOS ADICIONADOS =================
-
-	// Font
-	public static inline function font(key:String):String
-		return getPath('fonts/$key', TEXT);
-
-	// Inst e Voices
-	public static function inst(song:String, ?library:String):Null<Sound>
+	public static function getPackerAtlas(key:String, ?library:String):FlxAtlasFrames
 	{
-		var path = getPath('songs/${formatToSongPath(song)}/Inst.$SOUND_EXT', SOUND, library, true);
-		return Assets.exists(path) ? Assets.getSound(path) : null;
+		var txtPath = getPath('images/$key.txt', TEXT, library, true);
+		var img = image(key, library);
+		return FlxAtlasFrames.fromSpriteSheetPacker(img, Assets.getText(txtPath));
 	}
 
-	public static function voices(song:String, ?postfix:String, ?cache:Bool = true):Null<Sound>
+	public static function getMultiAtlas(keys:Array<String>, ?library:String):FlxAtlasFrames
 	{
-		var suffix = (postfix != null && postfix.length > 0) ? '-$postfix' : '';
-		var path = getPath('songs/${formatToSongPath(song)}/Voices$suffix.$SOUND_EXT', SOUND, null, true);
-		return Assets.exists(path) ? Assets.getSound(path) : null;
+		var baseFrames = getSparrowAtlas(keys[0], library);
+		if (keys.length <= 1) return baseFrames;
+
+		for (i in 1...keys.length)
+		{
+			var extraFrames = getSparrowAtlas(keys[i], library);
+			for (frame in extraFrames.frames)
+				baseFrames.pushFrame(frame);
+		}
+
+		return baseFrames;
 	}
+
+	// Texture Atlas (pasta do Animation.json)
+	public static function textureAtlas(key:String, ?library:String):String
+		return getPath('images/$key', TEXT, library, true);
 
 	// Texto de arquivo
 	public static function getTextFromFile(key:String, ?library:String):String
@@ -127,7 +166,7 @@ class Paths
 		return Assets.exists(path) ? Assets.getText(path) : '';
 	}
 
-	// Verificação de arquivo (IMAGE e TEXT são AssetType do OpenFL)
+	// Verificação de arquivo
 	public static function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String):Bool
 	{
 		#if MODS_ALLOWED
@@ -147,50 +186,37 @@ class Paths
 		return Assets.exists(path, type);
 	}
 
-	// Caminho primário (retorna o path como string pura, sem carregar asset)
-	public static function getPrimaryPath(key:String, ?library:String):String
-	{
-		#if MODS_ALLOWED
-		#if sys
-		var modPath = modFolders(key);
-		if (FileSystem.exists(modPath)) return modPath;
-		#end
-		#end
+	// Font
+	public static inline function font(key:String):String
+		return getPath('fonts/$key', TEXT);
 
-		return getPath(key, TEXT, library);
+	// Shaders
+	public static inline function shaderFrag(key:String):String
+		return getPath('shaders/$key.frag', TEXT, null, true);
+
+	public static inline function shaderVert(key:String):String
+		return getPath('shaders/$key.vert', TEXT, null, true);
+
+	// Inst e Voices
+	public static function inst(song:String, ?library:String):Null<Sound>
+	{
+		var path = getPath('songs/${formatToSongPath(song)}/Inst.$SOUND_EXT', SOUND, library, true);
+		return Assets.exists(path) ? Assets.getSound(path) : null;
 	}
 
-	// Texture Atlas (Animation.json do Animate)
-	public static function textureAtlas(key:String, ?library:String):String
-		return getPath('images/$key', TEXT, library, true);
-
-	// Packer Atlas
-	public static function getPackerAtlas(key:String, ?library:String):FlxAtlasFrames
+	public static function voices(song:String, ?postfix:String, ?cache:Bool = true):Null<Sound>
 	{
-		var txt = getPath('images/$key.txt', TEXT, library, true);
-		var img = image(key, library);
-		return FlxAtlasFrames.fromSpriteSheetPacker(img, Assets.getText(txt));
+		var suffix = (postfix != null && postfix.length > 0) ? '-$postfix' : '';
+		var path = getPath('songs/${formatToSongPath(song)}/Voices$suffix.$SOUND_EXT', SOUND, null, true);
+		return Assets.exists(path) ? Assets.getSound(path) : null;
 	}
 
-	// Multi Atlas (vários spritesheets separados por vírgula)
-	public static function getMultiAtlas(keys:Array<String>, ?library:String):FlxAtlasFrames
-	{
-		var baseFrames = getSparrowAtlas(keys[0], library);
-		if (keys.length <= 1) return baseFrames;
-
-		for (i in 1...keys.length)
-		{
-			var extraFrames = getSparrowAtlas(keys[i], library);
-			for (frame in extraFrames.frames)
-				baseFrames.pushFrame(frame);
-		}
-
-		return baseFrames;
-	}
+	public static function formatToSongPath(path:String):String
+		return path.toLowerCase().replace(" ", "-");
 
 	// ================= MODS =================
-
-	#if MODS_ALLOWED
+	// Esses métodos ficam FORA do #if MODS_ALLOWED para evitar erros de compilação
+	// quando a flag não está ativa — eles simplesmente retornam o path base
 
 	public static inline function mods(key:String = ""):String
 		return '$MODS_DIRECTORY/$key';
@@ -210,6 +236,7 @@ class Paths
 	public static function modFolders(key:String):String
 	{
 		#if sys
+		#if MODS_ALLOWED
 		if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
 		{
 			var path = mods(Mods.currentModDirectory + "/" + key);
@@ -222,9 +249,8 @@ class Paths
 			if (FileSystem.exists(path)) return path;
 		}
 		#end
+		#end
 
 		return '$MODS_DIRECTORY/$key';
 	}
-
-	#end
 }
