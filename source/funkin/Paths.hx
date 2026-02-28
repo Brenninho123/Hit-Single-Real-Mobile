@@ -81,7 +81,7 @@ class Paths
 		return Assets.exists(path) ? Assets.getSound(path) : null;
 	}
 
-	public static function image(key:String, ?library:String):Null<FlxGraphic>
+	public static function image(key:String, ?library:String, ?cache:Bool = true):Null<FlxGraphic>
 	{
 		var path = getPath('images/$key.png', IMAGE, library, true);
 		return Assets.exists(path) ? FlxGraphic.fromBitmapData(Assets.getBitmapData(path)) : null;
@@ -96,6 +96,97 @@ class Paths
 
 	public static function formatToSongPath(path:String):String
 		return path.toLowerCase().replace(" ", "-");
+
+	// ================= MÉTODOS ADICIONADOS =================
+
+	// Font
+	public static inline function font(key:String):String
+		return getPath('fonts/$key', TEXT);
+
+	// Inst e Voices
+	public static function inst(song:String, ?library:String):Null<Sound>
+	{
+		var path = getPath('songs/${formatToSongPath(song)}/Inst.$SOUND_EXT', SOUND, library, true);
+		return Assets.exists(path) ? Assets.getSound(path) : null;
+	}
+
+	public static function voices(song:String, ?postfix:String, ?cache:Bool = true):Null<Sound>
+	{
+		var suffix = (postfix != null && postfix.length > 0) ? '-$postfix' : '';
+		var path = getPath('songs/${formatToSongPath(song)}/Voices$suffix.$SOUND_EXT', SOUND, null, true);
+		return Assets.exists(path) ? Assets.getSound(path) : null;
+	}
+
+	// Texto de arquivo
+	public static function getTextFromFile(key:String, ?library:String):String
+	{
+		var path = getPath(key, TEXT, library, true);
+		#if sys
+		if (FileSystem.exists(path)) return File.getContent(path);
+		#end
+		return Assets.exists(path) ? Assets.getText(path) : '';
+	}
+
+	// Verificação de arquivo (IMAGE e TEXT são AssetType do OpenFL)
+	public static function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String):Bool
+	{
+		#if MODS_ALLOWED
+		#if sys
+		if (!ignoreMods)
+		{
+			var modPath = modFolders(key);
+			if (FileSystem.exists(modPath)) return true;
+		}
+		#end
+		#end
+
+		var path = getPath(key, type, library);
+		#if sys
+		if (FileSystem.exists(path)) return true;
+		#end
+		return Assets.exists(path, type);
+	}
+
+	// Caminho primário (retorna o path como string pura, sem carregar asset)
+	public static function getPrimaryPath(key:String, ?library:String):String
+	{
+		#if MODS_ALLOWED
+		#if sys
+		var modPath = modFolders(key);
+		if (FileSystem.exists(modPath)) return modPath;
+		#end
+		#end
+
+		return getPath(key, TEXT, library);
+	}
+
+	// Texture Atlas (Animation.json do Animate)
+	public static function textureAtlas(key:String, ?library:String):String
+		return getPath('images/$key', TEXT, library, true);
+
+	// Packer Atlas
+	public static function getPackerAtlas(key:String, ?library:String):FlxAtlasFrames
+	{
+		var txt = getPath('images/$key.txt', TEXT, library, true);
+		var img = image(key, library);
+		return FlxAtlasFrames.fromSpriteSheetPacker(img, Assets.getText(txt));
+	}
+
+	// Multi Atlas (vários spritesheets separados por vírgula)
+	public static function getMultiAtlas(keys:Array<String>, ?library:String):FlxAtlasFrames
+	{
+		var baseFrames = getSparrowAtlas(keys[0], library);
+		if (keys.length <= 1) return baseFrames;
+
+		for (i in 1...keys.length)
+		{
+			var extraFrames = getSparrowAtlas(keys[i], library);
+			for (frame in extraFrames.frames)
+				baseFrames.pushFrame(frame);
+		}
+
+		return baseFrames;
+	}
 
 	// ================= MODS =================
 
@@ -112,6 +203,9 @@ class Paths
 
 	public static inline function modsTxt(key:String):String
 		return modFolders('images/$key.txt');
+
+	public static inline function modsNoteskin(key:String):String
+		return modFolders('noteskins/$key.json');
 
 	public static function modFolders(key:String):String
 	{
