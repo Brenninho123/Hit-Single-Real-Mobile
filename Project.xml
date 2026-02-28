@@ -58,6 +58,8 @@
 		<set name="ANDROID_COMPILE_SDK_VERSION" value="34"/>
 		<set name="ANDROID_BUILD_TOOLS_VERSION" value="34.0.0"/>
 
+		<architecture name="armv7" />
+
 		<android permission="android.permission.INTERNET"/>
 		<android permission="android.permission.VIBRATE"/>
 
@@ -111,6 +113,7 @@
 	<define name="hscriptPos"/>
 
 	<haxedef name="NO_PRECOMPILED_HEADERS" if="LUA_ALLOWED"/>
+	<haxedef name="NO_PRECOMPILED_HEADERS" if="android"/>
 	<haxedef name="FLX_NO_HEALTH" />
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
