@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxState;
+import flixel.input.touch.FlxTouch;
 
 import funkin.FunkinAssets;
 import funkin.states.TitleState;
@@ -13,10 +14,10 @@ using StringTools;
 class Splash extends FlxState
 {
 	var _cachedAutoPause:Bool;
-	
+
 	var spriteEvents:FlxTimer;
 	var logo:FlxSprite;
-	
+
 	override function create()
 	{
 		_cachedAutoPause = FlxG.autoPause;
@@ -37,34 +38,51 @@ class Splash extends FlxState
 			#end logoFunc();
 		});
 	}
-	
+
 	override function update(elapsed:Float)
 	{
 		if (logo != null)
 		{
 			logo.updateHitbox();
 			logo.screenCenter();
-			
+
 			if (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.ENTER)
 			{
 				finish();
+				return;
 			}
+
+			#if mobile
+			for (touch in FlxG.touches.list)
+			{
+				if (touch.justPressed)
+				{
+					finish();
+					return;
+				}
+			}
+			#end
 		}
-		
+
 		super.update(elapsed);
 	}
-	
+
 	function logoFunc()
 	{
-		var folder = FileSystem.readDirectory('assets/images/branding');
+		#if sys
+		var folder = sys.FileSystem.readDirectory('assets/images/branding');
+		#else
+		var folder = openfl.utils.Assets.list().filter(f -> f.startsWith('assets/images/branding') && f.endsWith('.png')).map(f -> f.split('/').pop());
+		#end
+
 		var img = folder[FlxG.random.int(0, folder.length - 1)];
 		trace(folder);
-		
+
 		logo = new FlxSprite().loadGraphic(Paths.image('branding/${img.replace('.png', '')}'));
 		logo.screenCenter();
 		logo.visible = false;
 		add(logo);
-		
+
 		spriteEvents = new FlxTimer().start(1, (t0:FlxTimer) -> {
 			new FlxTimer().start(0.25, (t1:FlxTimer) -> {
 				FlxG.sound.volume = 1;
@@ -106,7 +124,7 @@ class Splash extends FlxState
 		}
 		complete();
 	}
-	
+
 	function complete()
 	{
 		FlxG.autoPause = _cachedAutoPause;
