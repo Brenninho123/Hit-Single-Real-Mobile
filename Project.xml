@@ -45,8 +45,7 @@
 	<define name="VIDEOS_ALLOWED" if="cpp desktop"/>
 	<define name="DISCORD_ALLOWED" if="desktop" />
 
-	<assets path="assets" embed="false" if="android" />
-	<assets path="assets" unless="android" />
+	<assets path="assets" />
 	<assets path='content' embed='false' if="MODS_ALLOWED"/>
 
 	<!-- ============================ Android Config ============================ -->
@@ -64,11 +63,6 @@
 
 		<android permission="android.permission.INTERNET"/>
 		<android permission="android.permission.VIBRATE"/>
-
-		<!-- Scoped Storage (Android 13+) -->
-		<android permission="android.permission.READ_MEDIA_AUDIO"/>
-		<android permission="android.permission.READ_MEDIA_IMAGES"/>
-		<android permission="android.permission.READ_MEDIA_VIDEO"/>
 
 		<icon path="projFiles/icon/icon16.png" size="36" />
 		<icon path="projFiles/icon/icon32.png" size="48" />
