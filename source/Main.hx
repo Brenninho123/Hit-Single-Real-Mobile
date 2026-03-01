@@ -48,7 +48,7 @@ class Main extends Sprite
 		super();
 
 		#if android
-		AndroidSystem.init();
+		AndroidStorage.init();
 		#end
 
 		initHaxeUI();
