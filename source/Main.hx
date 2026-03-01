@@ -12,7 +12,7 @@ import flixel.FlxState;
 import funkin.backend.DebugDisplay;
 
 #if android
-import android.AndroidStorage;
+import android.AndroidSystem;
 #end
 
 class Main extends Sprite
