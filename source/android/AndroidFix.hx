@@ -2,28 +2,42 @@ package android;
 
 /**
  * Wrapper seguro para operações de FileSystem no Android.
- * No Android, assets dentro do APK não são acessíveis via sys.FileSystem.
- * Use esse wrapper no lugar de sys.FileSystem e sys.io.File.
+ * Salva arquivos em /Android/data/com.fnf.hitsingle/files/
  */
 class AndroidFix
 {
+	public static final PACKAGE = "com.fnf.hitsingle";
+
+	/**
+	 * Retorna o path base em /Android/data/com.fnf.hitsingle/files/
+	 * Esse path é visível no gerenciador de arquivos e não precisa de permissão especial.
+	 */
+	public static function getDataPath():String
+	{
+		#if android
+		// lime.system.System.applicationStorageDirectory já aponta para
+		// /Android/data/com.fnf.hitsingle/files/ no Android
+		return lime.system.System.applicationStorageDirectory;
+		#elseif sys
+		return Sys.getCwd() + '/';
+		#else
+		return '';
+		#end
+	}
+
 	/**
 	 * Verifica se um arquivo existe.
-	 * No Android, checa primeiro via OpenFL Assets, depois via FileSystem se disponível.
+	 * Checa primeiro via OpenFL Assets (APK), depois no storage externo.
 	 */
 	public static function exists(path:String):Bool
 	{
 		#if android
-		// Checa via OpenFL Assets (dentro do APK)
 		if (openfl.utils.Assets.exists(path))
 			return true;
-
-		// Checa via FileSystem (storage externo)
 		#if sys
 		try { return sys.FileSystem.exists(path); }
 		catch (e:Dynamic) { return false; }
 		#end
-
 		return false;
 		#elseif sys
 		return sys.FileSystem.exists(path);
@@ -34,7 +48,6 @@ class AndroidFix
 
 	/**
 	 * Lê o conteúdo de um arquivo como String.
-	 * No Android, tenta via OpenFL Assets primeiro.
 	 */
 	public static function getContent(path:String):String
 	{
@@ -43,16 +56,12 @@ class AndroidFix
 		{
 			if (openfl.utils.Assets.exists(path, TEXT))
 				return openfl.utils.Assets.getText(path);
-
 			#if sys
 			if (sys.FileSystem.exists(path))
 				return sys.io.File.getContent(path);
 			#end
 		}
-		catch (e:Dynamic)
-		{
-			trace('[AndroidFix] Erro ao ler $path: $e');
-		}
+		catch (e:Dynamic) { trace('[AndroidFix] Erro ao ler $path: $e'); }
 		return '';
 		#elseif sys
 		try { return sys.io.File.getContent(path); }
@@ -64,14 +73,13 @@ class AndroidFix
 
 	/**
 	 * Lista arquivos de um diretório.
-	 * No Android, usa Assets.list() para listar arquivos dentro do APK.
+	 * No Android usa Assets.list() para arquivos dentro do APK.
 	 */
 	public static function readDirectory(path:String):Array<String>
 	{
 		#if android
 		try
 		{
-			// Normaliza o path removendo o prefixo "assets/" se existir
 			var assetPath = path.startsWith('assets/') ? path : 'assets/' + path;
 			assetPath = assetPath.endsWith('/') ? assetPath : assetPath + '/';
 
@@ -83,7 +91,6 @@ class AndroidFix
 				if (asset.startsWith(assetPath))
 				{
 					var relative = asset.substring(assetPath.length);
-					// Só pega arquivos diretos (sem subpastas)
 					if (relative.length > 0 && relative.indexOf('/') == -1)
 						result.push(relative);
 				}
@@ -110,20 +117,7 @@ class AndroidFix
 	}
 
 	/**
-	 * Verifica se é um diretório.
-	 */
-	public static function isDirectory(path:String):Bool
-	{
-		#if sys
-		try { return sys.FileSystem.exists(path) && sys.FileSystem.isDirectory(path); }
-		catch (e:Dynamic) { return false; }
-		#else
-		return false;
-		#end
-	}
-
-	/**
-	 * Cria um diretório recursivamente (só funciona no storage externo do Android).
+	 * Cria um diretório recursivamente.
 	 */
 	public static function createDirectory(path:String):Void
 	{
@@ -152,11 +146,12 @@ class AndroidFix
 	}
 
 	/**
-	 * Salva conteúdo em um arquivo (só no storage externo).
+	 * Salva conteúdo em um arquivo no Android/data.
 	 */
-	public static function saveContent(path:String, content:String):Void
+	public static function saveContent(fileName:String, content:String):Void
 	{
 		#if sys
+		var path = getDataPath() + fileName;
 		try
 		{
 			var dir = path.split('/').slice(0, -1).join('/');
@@ -168,19 +163,29 @@ class AndroidFix
 	}
 
 	/**
-	 * Retorna o diretório base para salvar arquivos no Android.
-	 * Usa o storage externo (/sdcard) se disponível.
+	 * Lê um arquivo do Android/data.
 	 */
-	public static function getSaveDirectory():String
+	public static function readSavedFile(fileName:String):Null<String>
 	{
-		#if android
-		if (exists('/sdcard'))
-			return '/sdcard/HitSingleReal/';
-		return lime.system.System.applicationStorageDirectory + '/HitSingleReal/';
-		#elseif sys
-		return Sys.getCwd() + '/';
+		#if sys
+		var path = getDataPath() + fileName;
+		try
+		{
+			if (sys.FileSystem.exists(path))
+				return sys.io.File.getContent(path);
+		}
+		catch (e:Dynamic) { trace('[AndroidFix] Erro ao ler $path: $e'); }
+		#end
+		return null;
+	}
+
+	public static function isDirectory(path:String):Bool
+	{
+		#if sys
+		try { return sys.FileSystem.exists(path) && sys.FileSystem.isDirectory(path); }
+		catch (e:Dynamic) { return false; }
 		#else
-		return '';
+		return false;
 		#end
 	}
 }
