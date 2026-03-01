@@ -12,7 +12,7 @@ import flixel.FlxState;
 import funkin.backend.DebugDisplay;
 
 #if android
-AndroidStorage.init();
+import android.AndroidStorage;
 #end
 
 class Main extends Sprite
@@ -20,7 +20,7 @@ class Main extends Sprite
 	public static final PSYCH_VERSION:String = '0.5.2h';
 	public static final NMV_VERSION:String = '0.2';
 	public static final FUNKIN_VERSION:String = '0.2.7';
-	
+
 	public static final startMeta =
 		{
 			width: 1280,
@@ -30,52 +30,49 @@ class Main extends Sprite
 			startFullScreen: false,
 			initialState: funkin.states.TitleState
 		};
-		
-	// You can pretty much ignore everything from here on - your code should go in your states.
+
 	public static var fpsVar:DebugDisplay;
-	
+
 	static function __init__()
 	{
 		funkin.utils.MacroUtil.haxeVersionEnforcement();
 	}
-	
+
 	public static function main():Void
 	{
 		Lib.current.addChild(new Main());
 	}
-	
+
 	public function new()
 	{
 		super();
 
+		#if android
+		AndroidStorage.init();
+		#end
+
 		initHaxeUI();
-		
+
 		#if (windows && cpp)
 		funkin.api.NativeWindows.setDarkMode();
 		#end
-		
+
 		// load save data before creating FlxGame
 		ClientPrefs.loadDefaultKeys();
 		FlxG.save.bind('funkin', CoolUtil.getSavePath());
-		
+
 		var game = new
 			#if CRASH_HANDLER
 			FNFGame
 			#else
 			FlxGame
 			#end(startMeta.width, startMeta.height, Init, startMeta.fps, startMeta.fps, true, startMeta.startFullScreen);
-			
-		// FlxG.game._customSoundTray wants just the class, it calls new from
-		// create() in there, which gets called when it's added to stage
-		// which is why it needs to be added before addChild(game) here
-		
-		// Also btw game has to be a variable for this to work ig - Orbyy
-		
+
 		@:privateAccess
 		game._customSoundTray = funkin.objects.FunkinSoundTray;
-		
+
 		addChild(game);
-		
+
 		#if !mobile
 		fpsVar = new DebugDisplay(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
@@ -86,19 +83,19 @@ class Main extends Sprite
 			fpsVar.visible = ClientPrefs.showFPS;
 		}
 		#end
-		
+
 		#if html5
 		FlxG.autoPause = false;
 		FlxG.mouse.visible = false;
 		#end
-		
+
 		FlxG.signals.gameResized.add(onResize);
-		
+
 		#if DISABLE_TRACES
 		haxe.Log.trace = (v:Dynamic, ?infos:haxe.PosInfos) -> {}
 		#end
 	}
-	
+
 	@:access(flixel.FlxCamera)
 	static function onResize(w:Int, h:Int)
 	{
@@ -108,7 +105,7 @@ class Main extends Sprite
 			// remove for now idfk some people have the textfield scaling fucky ???
 			// fpsVar.scaleX = fpsVar.scaleY = scale;
 		}
-		
+
 		if (FlxG.cameras != null)
 		{
 			for (i in FlxG.cameras.list)
@@ -116,13 +113,13 @@ class Main extends Sprite
 				if (i != null && i.filters != null) resetSpriteCache(i.flashSprite);
 			}
 		}
-		
+
 		if (FlxG.game != null)
 		{
 			resetSpriteCache(FlxG.game);
 		}
 	}
-	
+
 	public static function resetSpriteCache(sprite:Sprite):Void
 	{
 		@:privateAccess
@@ -131,7 +128,7 @@ class Main extends Sprite
 			sprite.__cacheBitmapData = null;
 		}
 	}
-	
+
 	function initHaxeUI():Void
 	{
 		#if haxeui_core
@@ -152,10 +149,7 @@ class FNFGame extends FlxGame
 		null
 		.draw();
 	}
-	
-	/**
-	 * Used to instantiate the guts of the flixel game object once we have a valid reference to the root.
-	 */
+
 	override function create(_):Void
 	{
 		try
@@ -168,7 +162,7 @@ class FNFGame extends FlxGame
 			onCrash(e);
 		}
 	}
-	
+
 	override function onFocus(_):Void
 	{
 		try
@@ -180,7 +174,7 @@ class FNFGame extends FlxGame
 			onCrash(e);
 		}
 	}
-	
+
 	override function onFocusLost(_):Void
 	{
 		try
@@ -192,10 +186,7 @@ class FNFGame extends FlxGame
 			onCrash(e);
 		}
 	}
-	
-	/**
-	 * Handles the `onEnterFrame` call and figures out how many updates and draw calls to do.
-	 */
+
 	override function onEnterFrame(_):Void
 	{
 		try
@@ -207,11 +198,7 @@ class FNFGame extends FlxGame
 			onCrash(e);
 		}
 	}
-	
-	/**
-	 * This function is called by `step()` and updates the actual game state.
-	 * May be called multiple times per "frame" or draw call.
-	 */
+
 	override function update():Void
 	{
 		#if CRASH_TEST
@@ -226,10 +213,7 @@ class FNFGame extends FlxGame
 			onCrash(e);
 		}
 	}
-	
-	/**
-	 * Goes through the game state and draws all the game objects and special effects.
-	 */
+
 	override function draw():Void
 	{
 		try
@@ -241,7 +225,7 @@ class FNFGame extends FlxGame
 			onCrash(e);
 		}
 	}
-	
+
 	private final function onCrash(e:haxe.Exception):Void
 	{
 		var emsg:String = "";
@@ -256,9 +240,9 @@ class FNFGame extends FlxGame
 					trace(stackItem);
 			}
 		}
-		
+
 		final crashReport = 'Error caught:' + e.message + '\nCallstack:\n' + emsg;
-		
+
 		FlxG.switchState(new funkin.backend.FallbackState(crashReport, () -> FlxG.switchState(() -> new MainMenuState())));
 	}
 }
