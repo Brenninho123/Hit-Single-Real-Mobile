@@ -15,11 +15,11 @@ import flixel.sound.FlxSound;
 
 #if android
 import android.*;
+import android.AndroidFix;
 #end
 
 #if sys
 import sys.io.*;
-
 import sys.*;
 #end
 
@@ -43,4 +43,3 @@ import funkin.objects.BGSprite;
 import funkin.backend.MusicBeatState;
 
 using StringTools;
-#end
