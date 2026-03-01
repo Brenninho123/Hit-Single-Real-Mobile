@@ -64,6 +64,13 @@
 		<android permission="android.permission.INTERNET"/>
 		<android permission="android.permission.VIBRATE"/>
 
+		<!-- Configura armazenamento em /Android/data/com.fnf.hitsingle/ -->
+		<config:android>
+			<application android:requestLegacyExternalStorage="false" />
+		</config:android>
+
+		<setenv name="ANDROID_DATA_PATH" value="/Android/data/com.fnf.hitsingle/files/" />
+
 		<icon path="projFiles/icon/icon16.png" size="36" />
 		<icon path="projFiles/icon/icon32.png" size="48" />
 		<icon path="projFiles/icon/icon64.png" size="72" />
