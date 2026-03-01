@@ -45,8 +45,8 @@
 	<define name="VIDEOS_ALLOWED" if="cpp desktop"/>
 	<define name="DISCORD_ALLOWED" if="desktop" />
 
-	<assets path="assets" />
-	<assets path="assets" />
+	<assets path="assets" embed="false" if="android" />
+	<assets path="assets" unless="android" />
 	<assets path='content' embed='false' if="MODS_ALLOWED"/>
 
 	<!-- ============================ Android Config ============================ -->
@@ -58,7 +58,9 @@
 		<set name="ANDROID_COMPILE_SDK_VERSION" value="34"/>
 		<set name="ANDROID_BUILD_TOOLS_VERSION" value="34.0.0"/>
 
+		<!-- Suporta ARMv7 e ARM64 -->
 		<architecture name="armv7" />
+		<architecture name="arm64" />
 
 		<android permission="android.permission.INTERNET"/>
 		<android permission="android.permission.VIBRATE"/>
