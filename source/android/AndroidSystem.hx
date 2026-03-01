@@ -10,10 +10,8 @@ import openfl.events.Event;
 
 class AndroidStorage
 {
-	// Pasta externa do jogo no Android
 	public static final GAME_FOLDER = "HitSingleReal";
 
-	// Subpastas que serão copiadas do APK para o externo
 	public static final ASSET_FOLDERS = [
 		"images",
 		"music",
@@ -28,10 +26,8 @@ class AndroidStorage
 	public static function getExternalPath():String
 	{
 		#if android
-		// Pega o storage externo real (/sdcard/HitSingleReal/)
 		var extPath = lime.system.System.documentsDirectory;
 
-		// Remove o "Documents" do final e sobe um nível pro sdcard
 		var parts = extPath.split("/");
 		while (parts.length > 0 && parts[parts.length - 1] != "storage" 
 			&& parts[parts.length - 1] != "sdcard"
@@ -40,11 +36,9 @@ class AndroidStorage
 			parts.pop();
 		}
 
-		// Tenta /sdcard diretamente, mais compatível
 		if (FileSystem.exists("/sdcard"))
 			return '/sdcard/$GAME_FOLDER/';
 
-		// Fallback para applicationStorageDirectory
 		return System.applicationStorageDirectory + "/$GAME_FOLDER/";
 		#else
 		return 'storage/$GAME_FOLDER/';
@@ -54,13 +48,6 @@ class AndroidStorage
 	public static function getBasePath():String
 		return getExternalPath();
 
-	// ===================== INIT + COPY =====================
-
-	/**
-	 * Chama isso no Main.hx antes de qualquer coisa.
-	 * Cria as pastas e copia os assets do APK pro externo
-	 * apenas na primeira vez (ou se a pasta não existir).
-	 */
 	public static function init():Void
 	{
 		#if sys
@@ -76,7 +63,6 @@ class AndroidStorage
 			trace("[AndroidStorage] Primeira execução detectada, copiando assets...");
 			copyAssetsFromAPK(base);
 
-			// Marca que já foi inicializado
 			File.saveContent(base + ".initialized", "1");
 			trace("[AndroidStorage] Assets copiados com sucesso!");
 		}
@@ -87,9 +73,6 @@ class AndroidStorage
 		#end
 	}
 
-	/**
-	 * Força a re-cópia de todos os assets (útil ao atualizar o jogo).
-	 */
 	public static function forceReinit():Void
 	{
 		#if sys
@@ -100,8 +83,6 @@ class AndroidStorage
 		init();
 		#end
 	}
-
-	// ===================== CÓPIA DE ASSETS =====================
 
 	static function copyAssetsFromAPK(destBase:String):Void
 	{
@@ -122,20 +103,16 @@ class AndroidStorage
 
 		for (asset in list)
 		{
-			// Só copia assets que começam com o caminho desejado
 			if (!asset.startsWith(assetPath)) continue;
 
-			// Monta o caminho de destino relativo
 			var relative = asset.substring("assets/".length);
 			var dest = destPath.split(GAME_FOLDER + "/")[0] 
 				+ GAME_FOLDER + "/" + relative;
 
-			// Cria as subpastas necessárias
 			var destDir = dest.split("/");
 			destDir.pop();
 			createDirectory(destDir.join("/"));
 
-			// Só copia se não existir já
 			if (!FileSystem.exists(dest))
 			{
 				try
@@ -152,8 +129,6 @@ class AndroidStorage
 		}
 		#end
 	}
-
-	// ===================== FILE OPERATIONS =====================
 
 	public static function saveFile(fileName:String, content:String):Void
 	{
@@ -221,15 +196,12 @@ class AndroidStorage
 		return [];
 	}
 
-	// ===================== UTILS =====================
-
 	public static function createDirectory(path:String):Void
 	{
 		#if sys
 		if (path == null || path.length == 0) return;
 		if (!FileSystem.exists(path))
 		{
-			// Cria recursivamente
 			var parts = path.split("/");
 			var current = "";
 			for (part in parts)
