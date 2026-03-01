@@ -43,3 +43,4 @@ import funkin.objects.BGSprite;
 import funkin.backend.MusicBeatState;
 
 using StringTools;
+#end
