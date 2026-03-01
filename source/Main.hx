@@ -11,6 +11,10 @@ import flixel.FlxState;
 
 import funkin.backend.DebugDisplay;
 
+#if android
+AndroidStorage.init();
+#end
+
 class Main extends Sprite
 {
 	public static final PSYCH_VERSION:String = '0.5.2h';
